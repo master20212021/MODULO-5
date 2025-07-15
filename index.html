@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Práctica Final: Reto 5 Días en Demo - Modo Sníper Mental</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #111827; }
+        @media print {
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .no-print { display: none; }
+            .printable-section {
+                border: none !important;
+                box-shadow: none !important;
+                margin-bottom: 2rem;
+                page-break-inside: avoid;
+            }
+            .page-break-before { page-break-before: always; }
+        }
+        .custom-radio {
+            appearance: none; -webkit-appearance: none;
+            width: 20px; height: 20px;
+            border: 2px solid #4B5563;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .custom-radio:checked {
+            border-color: #34D399;
+        }
+        .custom-radio:checked::after {
+            content: '';
+            width: 10px; height: 10px;
+            background-color: #34D399;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body class="text-white flex justify-center p-4 sm:p-8">
+    <main class="w-full max-w-4xl space-y-10">
+        <header class="text-center">
+            <p class="text-lg font-semibold text-emerald-400">PRÁCTICA FINAL DEL MÓDULO 5</p>
+            <h1 class="text-4xl md:text-5xl font-black">Reto 5 Días en Demo: Modo Sníper Mental</h1>
+        </header>
+
+        <section class="printable-section">
+            <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">📆</span> Hojas Diarias</h2>
+            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 printable-section">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-emerald-300">Día 1</h3>
+                    <div class="flex gap-4 items-center">
+                        <label for="day1-date" class="font-semibold">Fecha:</label>
+                        <input type="text" id="day1-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="day1-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
+                            <input type="number" id="day1-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
+                        </div>
+                        <div>
+                            <label for="day1-result" class="block text-lg font-semibold mb-2">Resultado:</label>
+                            <input type="text" id="day1-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
+                        </div>
+                    </div>
+                    <div>
+                        <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
+                        <div class="flex gap-6">
+                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day1" class="custom-radio mr-2"> Sí</label>
+                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day1" class="custom-radio mr-2"> No</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="day1-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
+                        <input type="text" id="day1-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
+                    </div>
+                    <div>
+                        <label for="day1-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
+                        <textarea id="day1-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 printable-section">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-emerald-300">Día 2</h3>
+                    <div class="flex gap-4 items-center">
+                        <label for="day2-date" class="font-semibold">Fecha:</label>
+                        <input type="text" id="day2-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="day2-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
+                            <input type="number" id="day2-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
+                        </div>
+                        <div>
+                            <label for="day2-result" class="block text-lg font-semibold mb-2">Resultado:</label>
+                            <input type="text" id="day2-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
+                        </div>
+                    </div>
+                    <div>
+                        <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
+                        <div class="flex gap-6">
+                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day2" class="custom-radio mr-2"> Sí</label>
+                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day2" class="custom-radio mr-2"> No</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="day2-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
+                        <input type="text" id="day2-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
+                    </div>
+                    <div>
+                        <label for="day2-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
+                        <textarea id="day2-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 printable-section">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-emerald-300">Día 3</h3>
+                    <div class="flex gap-4 items-center">
+                        <label for="day3-date" class="font-semibold">Fecha:</label>
+                        <input type="text" id="day3-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="day3-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
+                            <input type="number" id="day3-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
+                        </div>
+                        <div>
+                            <label for="day3-result" class="block text-lg font-semibold mb-2">Resultado:</label>
+                            <input type="text" id="day3-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
+                        </div>
+                    </div>
+                    <div>
+                        <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
+                        <div class="flex gap-6">
+                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day3" class="custom-radio mr-2"> Sí</label>
+                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day3" class="custom-radio mr-2"> No</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="day3-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
+                        <input type="text" id="day3-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
+                    </div>
+                    <div>
+                        <label for="day3-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
+                        <textarea id="day3-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 printable-section">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-emerald-300">Día 4</h3>
+                    <div class="flex gap-4 items-center">
+                        <label for="day4-date" class="font-semibold">Fecha:</label>
+                        <input type="text" id="day4-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="day4-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
+                            <input type="number" id="day4-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
+                        </div>
+                        <div>
+                            <label for="day4-result" class="block text-lg font-semibold mb-2">Resultado:</label>
+                            <input type="text" id="day4-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
+                        </div>
+                    </div>
+                    <div>
+                        <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
+                        <div class="flex gap-6">
+                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day4" class="custom-radio mr-2"> Sí</label>
+                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day4" class="custom-radio mr-2"> No</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="day4-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
+                        <input type="text" id="day4-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
+                    </div>
+                    <div>
+                        <label for="day4-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
+                        <textarea id="day4-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 printable-section">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-emerald-300">Día 5</h3>
+                    <div class="flex gap-4 items-center">
+                        <label for="day5-date" class="font-semibold">Fecha:</label>
+                        <input type="text" id="day5-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="day5-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
+                            <input type="number" id="day5-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
+                        </div>
+                        <div>
+                            <label for="day5-result" class="block text-lg font-semibold mb-2">Resultado:</label>
+                            <input type="text" id="day5-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
+                        </div>
+                    </div>
+                    <div>
+                        <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
+                        <div class="flex gap-6">
+                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day5" class="custom-radio mr-2"> Sí</label>
+                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day5" class="custom-radio mr-2"> No</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="day5-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
+                        <input type="text" id="day5-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
+                    </div>
+                    <div>
+                        <label for="day5-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
+                        <textarea id="day5-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gray-800 p-6 sm:p-8 rounded-2xl border-2 border-emerald-500/50 printable-section page-break-before">
+            <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">🎯</span> Reto del Módulo</h2>
+            <div class="space-y-4 text-lg text-gray-300">
+                <p><strong class="text-white">Entrená durante 5 días en demo como si fuera real.</strong> Usa este diario para cada sesión.</p>
+                <p class="italic text-amber-400">"Si no podés operar con disciplina sin plata, no estás listo pa’ entrar en real."</p>
+                <div class="pt-4 mt-4 border-t border-gray-700">
+                    <p class="font-semibold text-white">Tarea adicional de compromiso:</p>
+                    <p>Después de cada sesión, grabate un audio de 1 minuto diciendo: <strong class="text-emerald-300">“Hoy operé con disciplina porque…”</strong> y describe cómo lo lograste. Guarda esos 5 audios como tu testimonio de progreso.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="text-center py-6 no-print">
+            <button onclick="window.print()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-lg transition-transform transform hover:scale-105">
+                Imprimir o Guardar como PDF
+            </button>
+        </div>
+    </main>
+</body>
+</html>
