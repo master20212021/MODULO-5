@@ -5,9 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Práctica Final: Reto 5 Días en Demo - Modo Sníper Mental</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet" />
+    <!-- Font Awesome para íconos de redes sociales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #111827; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030712; /* Fondo casi negro consistente */
+            color: #E5E7EB; /* Texto gris claro consistente */
+            overflow-x: hidden; /* Evita scroll horizontal */
+            min-height: 100vh; /* Asegura que el body ocupe al menos la altura completa del viewport */
+            display: flex; /* Convierte el body en un flex container */
+            flex-direction: column; /* Apila los hijos verticalmente */
+            align-items: center; /* Centra los hijos horizontalmente si no ocupan todo el ancho */
+            padding: 0; /* Elimina padding directo del body para aplicarlo en el contenedor de contenido */
+        }
+        /* Grano/Ruido sutil para el fondo, copiado de la landing page */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/png;base64,iVB0SUhEUgAAADAAAAAwCAMAAAD9gGz5AAAAAXNSR0IB2cksfwAAAAlwSFlzAAAWJQAAFiUAUFXgxwAAABhQTFRFAAAAsND/sND/sND/sND/sND/sND/sND/sND/jQ0vAAAACnRSTlMAAAAA+wD49z8nBA+MvK+1nQAAABpJREFUeJxjYmBgZGSAjYAAhjFGEGAABgBcA1M77D2NwgAAAABJRU5ErkJggg=='); /* Pequeña imagen de grano */
+            background-repeat: repeat;
+            opacity: 0.02; /* Muy baja opacidad */
+            pointer-events: none; /* Asegura que no interfiera con interacciones */
+            z-index: -1;
+        }
+
+        /* Define una variable CSS para la fuente del encabezado */
+        :root {
+            --heading-font: 'Montserrat', sans-serif; /* Montserrat aplicada por defecto ahora */
+        }
+
+        /* Aplica la fuente Montserrat a todos los h1 y h2 */
+        h1, h2 {
+            font-family: var(--heading-font);
+        }
+
         @media print {
             body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .no-print { display: none; }
@@ -28,231 +65,342 @@
             position: relative;
         }
         .custom-radio:checked {
-            border-color: #34D399;
+            border-color: #34D399; /* Emerald-400 */
         }
         .custom-radio:checked::after {
             content: '';
             width: 10px; height: 10px;
-            background-color: #34D399;
+            background-color: #34D399; /* Emerald-400 */
             border-radius: 50%;
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
         }
+
+        /* Estilos de la landing page copiados para consistencia */
+        .section-glow {
+            box-shadow:
+                0 0 40px rgba(34, 211, 238, 0.1), /* Sombra principal más fuerte */
+                0 0 80px rgba(34, 211, 238, 0.05), /* Sombra de halo exterior */
+                0 0 120px rgba(6, 182, 212, 0.03); /* Sombra más difusa */
+            border-radius: 1.5rem; /* Bordes más redondeados para un look premium */
+            overflow: hidden; /* Asegura que las sombras internas se recorten */
+            transition: box-shadow 0.5s ease-in-out; /* Transición suave para el brillo */
+        }
+        .section-glow:hover {
+            box-shadow:
+                0 0 60px rgba(34, 211, 238, 0.15),
+                0 0 100px rgba(34, 211, 238, 0.08),
+                0 0 150px rgba(6, 182, 212, 0.05);
+        }
+        .social-icon {
+            font-size: 1.8rem; /* Tamaño del ícono por defecto en footer */
+            color: #E5E7EB; /* Color por defecto */
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1); /* Efecto de elevación y escala sutil */
+        }
+        .social-icon.header-social {
+            font-size: 2.8rem; /* Tamaño más grande para íconos en el header */
+        }
+        .social-icon.fa-telegram:hover {
+            color: #0088CC; /* Color de Telegram */
+        }
+        .social-icon.fa-instagram:hover {
+            color: #E4405F; /* Color de Instagram */
+        }
+        .social-icon.fa-facebook:hover {
+            color: #1877F2; /* Color de Facebook */
+        }
+        .social-icon.fa-tiktok:hover {
+            color: #69C9D0; /* Color de TikTok (principal) */
+        }
+
+        /* Botón de impresión con estilo consistente */
+        .button-print {
+            background-color: #10B981; /* Emerald-500 */
+            color: #030712; /* Texto casi negro */
+            font-weight: 700; /* Bold */
+            padding: 1rem 2.5rem; /* Aumentar padding */
+            border-radius: 0.75rem; /* Bordes más redondeados */
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3); /* Sombra emerald */
+        }
+        .button-print:hover {
+            background-color: #059669; /* Emerald-600 */
+            transform: translateY(-4px) scale(1.02); /* Efecto de "lift" más pronunciado */
+            box-shadow: 0 12px 25px rgba(16, 185, 129, 0.4); /* Sombra más grande al pasar el mouse */
+        }
     </style>
 </head>
-<body class="text-white flex justify-center p-4 sm:p-8">
-    <main class="w-full max-w-4xl space-y-10">
-        <header class="text-center">
-            <p class="text-lg font-semibold text-emerald-400">PRÁCTICA FINAL DEL MÓDULO 5</p>
-            <h1 class="text-4xl md:text-5xl font-black">Reto 5 Días en Demo: Modo Sníper Mental</h1>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+    <!-- Contenedor principal para el header y main, para controlar el centrado y padding -->
+    <div class="flex-grow w-full max-w-4xl mx-auto p-4 sm:p-8">
+        <header class="text-center py-8 bg-gray-800 rounded-2xl section-glow mb-10">
+            <!-- Logo al principio de la página -->
+            <img src="https://i.postimg.cc/nVW2PvKM/logo-png-oficial-fondo-trasparente.png" alt="Logo para_traders_" class="mx-auto h-24 w-auto mb-6 opacity-90">
+
+            <p class="text-lg font-semibold text-emerald-400 uppercase">PRÁCTICA FINAL DEL MÓDULO 5</p>
+            <h1 class="text-4xl md:text-5xl font-black mt-2">Reto 5 Días en Demo: Modo Sníper Mental</h1>
+
+            <!-- Redes Sociales en Header -->
+            <div class="flex justify-center space-x-8 mt-8 mb-4">
+                <a href="https://t.me/erostrading" target="_blank" rel="noopener noreferrer" aria-label="Telegram de para_traders_">
+                    <i class="fab fa-telegram header-social social-icon text-gray-300 hover:text-cyan-400"></i>
+                </a>
+                <a href="https://www.instagram.com/para_traders__?igsh=MXd0eGdtZ3ZnaWJxag==" target="_blank" rel="noopener noreferrer" aria-label="Instagram de para_traders_">
+                    <i class="fab fa-instagram header-social social-icon text-gray-300 hover:text-pink-500"></i>
+                </a>
+                <a href="https://www.facebook.com/paraltraders" target="_blank" rel="noopener noreferrer" aria-label="Facebook de para_traders_">
+                    <i class="fab fa-facebook header-social social-icon text-gray-300 hover:text-blue-600"></i>
+                </a>
+                <a href="https://www.tiktok.com/@para_traders?_t=ZT-8yicg47qPio&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok de para_traders_">
+                    <i class="fab fa-tiktok header-social social-icon text-gray-300 hover:text-teal-400"></i>
+                </a>
+            </div>
         </header>
 
-        <section class="printable-section">
-            <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">📆</span> Hojas Diarias</h2>
-            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 printable-section">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-emerald-300">Día 1</h3>
-                    <div class="flex gap-4 items-center">
-                        <label for="day1-date" class="font-semibold">Fecha:</label>
-                        <input type="text" id="day1-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
-                    </div>
-                </div>
-                <div class="space-y-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div>
-                            <label for="day1-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
-                            <input type="number" id="day1-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
+        <main class="space-y-10">
+            <section class="printable-section">
+                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">📆</span> Hojas Diarias</h2>
+                <div class="space-y-8">
+                    <!-- Día 1 -->
+                    <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 section-glow printable-section">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-emerald-300">Día 1</h3>
+                            <div class="flex gap-4 items-center">
+                                <label for="day1-date" class="font-semibold">Fecha:</label>
+                                <input type="text" id="day1-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
+                            </div>
                         </div>
-                        <div>
-                            <label for="day1-result" class="block text-lg font-semibold mb-2">Resultado:</label>
-                            <input type="text" id="day1-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="day1-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
+                                    <input type="number" id="day1-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
+                                </div>
+                                <div>
+                                    <label for="day1-result" class="block text-lg font-semibold mb-2">Resultado:</label>
+                                    <input type="text" id="day1-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
+                                </div>
+                            </div>
+                            <div>
+                                <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day1" class="custom-radio mr-2"> Sí</label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day1" class="custom-radio mr-2"> No</label>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="day1-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
+                                <input type="text" id="day1-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
+                            </div>
+                            <div>
+                                <label for="day1-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
+                                <textarea id="day1-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
-                        <div class="flex gap-6">
-                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day1" class="custom-radio mr-2"> Sí</label>
-                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day1" class="custom-radio mr-2"> No</label>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="day1-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
-                        <input type="text" id="day1-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
-                    </div>
-                    <div>
-                        <label for="day1-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
-                        <textarea id="day1-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
-                    </div>
-                </div>
-            </div>
 
-            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 printable-section">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-emerald-300">Día 2</h3>
-                    <div class="flex gap-4 items-center">
-                        <label for="day2-date" class="font-semibold">Fecha:</label>
-                        <input type="text" id="day2-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
-                    </div>
-                </div>
-                <div class="space-y-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div>
-                            <label for="day2-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
-                            <input type="number" id="day2-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
+                    <!-- Día 2 -->
+                    <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 section-glow printable-section">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-emerald-300">Día 2</h3>
+                            <div class="flex gap-4 items-center">
+                                <label for="day2-date" class="font-semibold">Fecha:</label>
+                                <input type="text" id="day2-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
+                            </div>
                         </div>
-                        <div>
-                            <label for="day2-result" class="block text-lg font-semibold mb-2">Resultado:</label>
-                            <input type="text" id="day2-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="day2-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
+                                    <input type="number" id="day2-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
+                                </div>
+                                <div>
+                                    <label for="day2-result" class="block text-lg font-semibold mb-2">Resultado:</label>
+                                    <input type="text" id="day2-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
+                                </div>
+                            </div>
+                            <div>
+                                <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day2" class="custom-radio mr-2"> Sí</label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day2" class="custom-radio mr-2"> No</label>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="day2-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
+                                <input type="text" id="day2-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
+                            </div>
+                            <div>
+                                <label for="day2-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
+                                <textarea id="day2-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
-                        <div class="flex gap-6">
-                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day2" class="custom-radio mr-2"> Sí</label>
-                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day2" class="custom-radio mr-2"> No</label>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="day2-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
-                        <input type="text" id="day2-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
-                    </div>
-                    <div>
-                        <label for="day2-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
-                        <textarea id="day2-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
-                    </div>
-                </div>
-            </div>
 
-            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 printable-section">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-emerald-300">Día 3</h3>
-                    <div class="flex gap-4 items-center">
-                        <label for="day3-date" class="font-semibold">Fecha:</label>
-                        <input type="text" id="day3-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
-                    </div>
-                </div>
-                <div class="space-y-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div>
-                            <label for="day3-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
-                            <input type="number" id="day3-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
+                    <!-- Día 3 -->
+                    <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 section-glow printable-section">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-emerald-300">Día 3</h3>
+                            <div class="flex gap-4 items-center">
+                                <label for="day3-date" class="font-semibold">Fecha:</label>
+                                <input type="text" id="day3-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
+                            </div>
                         </div>
-                        <div>
-                            <label for="day3-result" class="block text-lg font-semibold mb-2">Resultado:</label>
-                            <input type="text" id="day3-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="day3-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
+                                    <input type="number" id="day3-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
+                                </div>
+                                <div>
+                                    <label for="day3-result" class="block text-lg font-semibold mb-2">Resultado:</label>
+                                    <input type="text" id="day3-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
+                                </div>
+                            </div>
+                            <div>
+                                <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day3" class="custom-radio mr-2"> Sí</label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day3" class="custom-radio mr-2"> No</label>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="day3-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
+                                <input type="text" id="day3-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
+                            </div>
+                            <div>
+                                <label for="day3-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
+                                <textarea id="day3-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
-                        <div class="flex gap-6">
-                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day3" class="custom-radio mr-2"> Sí</label>
-                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day3" class="custom-radio mr-2"> No</label>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="day3-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
-                        <input type="text" id="day3-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
-                    </div>
-                    <div>
-                        <label for="day3-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
-                        <textarea id="day3-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
-                    </div>
-                </div>
-            </div>
 
-            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 printable-section">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-emerald-300">Día 4</h3>
-                    <div class="flex gap-4 items-center">
-                        <label for="day4-date" class="font-semibold">Fecha:</label>
-                        <input type="text" id="day4-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
-                    </div>
-                </div>
-                <div class="space-y-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div>
-                            <label for="day4-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
-                            <input type="number" id="day4-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
+                    <!-- Día 4 -->
+                    <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 section-glow printable-section">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-emerald-300">Día 4</h3>
+                            <div class="flex gap-4 items-center">
+                                <label for="day4-date" class="font-semibold">Fecha:</label>
+                                <input type="text" id="day4-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
+                            </div>
                         </div>
-                        <div>
-                            <label for="day4-result" class="block text-lg font-semibold mb-2">Resultado:</label>
-                            <input type="text" id="day4-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="day4-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
+                                    <input type="number" id="day4-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
+                                </div>
+                                <div>
+                                    <label for="day4-result" class="block text-lg font-semibold mb-2">Resultado:</label>
+                                    <input type="text" id="day4-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
+                                </div>
+                            </div>
+                            <div>
+                                <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day4" class="custom-radio mr-2"> Sí</label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day4" class="custom-radio mr-2"> No</label>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="day4-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
+                                <input type="text" id="day4-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
+                            </div>
+                            <div>
+                                <label for="day4-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
+                                <textarea id="day4-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
-                        <div class="flex gap-6">
-                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day4" class="custom-radio mr-2"> Sí</label>
-                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day4" class="custom-radio mr-2"> No</label>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="day4-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
-                        <input type="text" id="day4-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
-                    </div>
-                    <div>
-                        <label for="day4-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
-                        <textarea id="day4-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
-                    </div>
-                </div>
-            </div>
 
-            <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 printable-section">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-emerald-300">Día 5</h3>
-                    <div class="flex gap-4 items-center">
-                        <label for="day5-date" class="font-semibold">Fecha:</label>
-                        <input type="text" id="day5-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
+                    <!-- Día 5 -->
+                    <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 section-glow printable-section">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-emerald-300">Día 5</h3>
+                            <div class="flex gap-4 items-center">
+                                <label for="day5-date" class="font-semibold">Fecha:</label>
+                                <input type="text" id="day5-date" class="w-28 bg-gray-900/50 border-b border-gray-600 p-1 focus:outline-none focus:border-emerald-400">
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="day5-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
+                                    <input type="number" id="day5-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
+                                </div>
+                                <div>
+                                    <label for="day5-result" class="block text-lg font-semibold mb-2">Resultado:</label>
+                                    <input type="text" id="day5-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
+                                </div>
+                            </div>
+                            <div>
+                                <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day5" class="custom-radio mr-2"> Sí</label>
+                                    <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day5" class="custom-radio mr-2"> No</label>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="day5-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
+                                <input type="text" id="day5-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
+                            </div>
+                            <div>
+                                <label for="day5-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
+                                <textarea id="day5-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="space-y-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div>
-                            <label for="day5-ops" class="block text-lg font-semibold mb-2">Operaciones realizadas:</label>
-                            <input type="number" id="day5-ops" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition">
-                        </div>
-                        <div>
-                            <label for="day5-result" class="block text-lg font-semibold mb-2">Resultado:</label>
-                            <input type="text" id="day5-result" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: +$50, -$20, Break-even">
-                        </div>
-                    </div>
-                    <div>
-                        <p class="block text-lg font-semibold mb-2">¿Seguí mi plan?</p>
-                        <div class="flex gap-6">
-                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day5" class="custom-radio mr-2"> Sí</label>
-                            <label class="flex items-center cursor-pointer"><input type="radio" name="plan-day5" class="custom-radio mr-2"> No</label>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="day5-emotion" class="block text-lg font-semibold mb-2">¿Qué emoción apareció?</label>
-                        <input type="text" id="day5-emotion" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition" placeholder="Ej: Ansiedad, calma, impaciencia...">
-                    </div>
-                    <div>
-                        <label for="day5-learning" class="block text-lg font-semibold mb-2">¿Qué aprendí hoy sobre mí?</label>
-                        <textarea id="day5-learning" rows="2" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg p-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none transition"></textarea>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="bg-gray-800 p-6 sm:p-8 rounded-2xl border-2 border-emerald-500/50 printable-section page-break-before">
-            <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">🎯</span> Reto del Módulo</h2>
-            <div class="space-y-4 text-lg text-gray-300">
-                <p><strong class="text-white">Entrená durante 5 días en demo como si fuera real.</strong> Usa este diario para cada sesión.</p>
-                <p class="italic text-amber-400">"Si no podés operar con disciplina sin plata, no estás listo pa’ entrar en real."</p>
-                <div class="pt-4 mt-4 border-t border-gray-700">
-                    <p class="font-semibold text-white">Tarea adicional de compromiso:</p>
-                    <p>Después de cada sesión, grabate un audio de 1 minuto diciendo: <strong class="text-emerald-300">“Hoy operé con disciplina porque…”</strong> y describe cómo lo lograste. Guarda esos 5 audios como tu testimonio de progreso.</p>
+            <section class="bg-gray-800 p-6 sm:p-8 rounded-2xl border-2 border-emerald-500/50 section-glow printable-section page-break-before">
+                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-4xl">🎯</span> Reto del Módulo</h2>
+                <div class="space-y-4 text-lg text-gray-300">
+                    <p><strong class="text-white">Entrená durante 5 días en demo como si fuera real.</strong> Usa este diario para cada sesión.</p>
+                    <p class="italic text-amber-400">"Si no podés operar con disciplina sin plata, no estás listo pa’ entrar en real."</p>
+                    <div class="pt-4 mt-4 border-t border-gray-700">
+                        <p class="font-semibold text-white">Tarea adicional de compromiso:</p>
+                        <p>Después de cada sesión, grabate un audio de 1 minuto diciendo: <strong class="text-emerald-300">“Hoy operé con disciplina porque…”</strong> y describe cómo lo lograste. Guarda esos 5 audios como tu testimonio de progreso.</p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <div class="text-center py-6 no-print">
-            <button onclick="window.print()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-lg transition-transform transform hover:scale-105">
-                Imprimir o Guardar como PDF
-            </button>
+            <div class="text-center py-6 no-print">
+                <button onclick="window.print()" class="button-print">
+                    Imprimir o Guardar como PDF
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Pie de página con logo, redes sociales y disclaimer -->
+    <footer class="text-center py-12 px-4 bg-gray-900 border-t border-gray-700 w-full max-w-4xl mx-auto">
+        <!-- Logo en el pie de página -->
+        <img src="https://i.postimg.cc/nVW2PvKM/logo-png-oficial-fondo-trasparente.png" alt="Logo de para_traders_" class="mx-auto h-20 w-auto mb-6 opacity-80" loading="lazy">
+        
+        <!-- Redes sociales -->
+        <div class="flex justify-center space-x-6 mb-6">
+            <a href="https://t.me/erostrading" target="_blank" rel="noopener noreferrer" aria-label="Telegram de para_traders_">
+                <i class="fab fa-telegram social-icon"></i>
+            </a>
+            <a href="https://www.instagram.com/para_traders__?igsh=MXd0eGdtZ3ZnaWJxag==" target="_blank" rel="noopener noreferrer" aria-label="Instagram de para_traders_">
+                <i class="fab fa-instagram social-icon"></i>
+            </a>
+            <a href="https://www.facebook.com/paraltraders" target="_blank" rel="noopener noreferrer" aria-label="Facebook de para_traders_">
+                <i class="fab fa-facebook social-icon"></i>
+            </a>
+            <a href="https://www.tiktok.com/@para_traders?_t=ZT-8yicg47qPio&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok de para_traders_">
+                <i class="fab fa-tiktok social-icon"></i>
+            </a>
         </div>
-    </main>
+
+        <p class="text-sm text-gray-500 max-w-2xl mx-auto">
+            Aviso Legal: "para_traders_" ofrece contenido educativo y de desarrollo personal en el ámbito del psicotrading. Este curso no constituye asesoramiento financiero, de inversión ni recomendación de productos financieros específicos. Operar en los mercados financieros implica un riesgo significativo de pérdida de capital y no es adecuado para todos los inversores. Los resultados pasados no garantizan resultados futuros. Las decisiones de inversión son responsabilidad exclusiva del usuario.
+        </p>
+    </footer>
 </body>
 </html>
